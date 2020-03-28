@@ -47,6 +47,7 @@ document.onkeydown = e => {
       left: bojo.left + 20,
       top: bojo.top - 20
     });
+    document.getElementById("fire").play();
     drawLooRolls();
   }
   drawBojo();
@@ -98,6 +99,7 @@ const collisionDetection = () => {
       ) {
         enemies.splice(covid, 1);
         looRolls.splice(looRoll, 1);
+        document.getElementById("getStuffed").play();
       }
     }
   }
