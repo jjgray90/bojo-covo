@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #background {
+  width: 1200px;
+  height: 700px;
+  background-size: cover;
+  background-image: url("assets/img/background.jpg");
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+body #background #bojo {
+  width: 60px;
+  height: 80px;
+  background-image: url("assets/img/bojo.png");
+  background-size: cover;
+  position: absolute;
+  left: 570px;
+  top: 525px;
+  -webkit-animation-name: bojoWiggle;
+          animation-name: bojoWiggle;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes bojoWiggle {
+  50% {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes bojoWiggle {
+  50% {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+body #background #heroes {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+body #background #heroes .nhs {
+  width: 80px;
+  height: 33px;
+  background-image: url("assets/img/nhs.png");
+  background-size: cover;
+  position: absolute;
+}
+
+body #background #looRolls {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+body #background #looRolls .looRoll {
+  width: 30px;
+  height: 50px;
+  background-image: url("assets/img/toilet-roll.png");
+  background-size: cover;
+  position: absolute;
+}
+
+body #background #enemies {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+body #background #enemies .covid {
+  width: 50px;
+  height: 50px;
+  background-image: url("assets/img/corona.png");
+  background-size: cover;
+  position: absolute;
+}
+/*# sourceMappingURL=style.module.css.map */

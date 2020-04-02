@@ -1,35 +1,48 @@
 let bojo = {
-  left: 575,
-  top: 600
+  left: 570,
+  top: 525
 };
 
 let looRolls = [];
 
 let enemies = [
-  { left: 200, top: 100 },
-  { left: 300, top: 100 },
-  { left: 400, top: 100 },
-  { left: 500, top: 100 },
-  { left: 600, top: 100 },
-  { left: 700, top: 100 },
-  { left: 800, top: 100 },
-  { left: 900, top: 100 },
-  { left: 200, top: 175 },
-  { left: 300, top: 175 },
-  { left: 400, top: 175 },
-  { left: 500, top: 175 },
-  { left: 600, top: 175 },
-  { left: 700, top: 175 },
-  { left: 800, top: 175 },
-  { left: 900, top: 175 },
-  { left: 200, top: 250 },
-  { left: 300, top: 250 },
-  { left: 400, top: 250 },
-  { left: 500, top: 250 },
-  { left: 600, top: 250 },
-  { left: 700, top: 250 },
-  { left: 800, top: 250 },
-  { left: 900, top: 250 }
+  { left: 175, top: -175 },
+  { left: 275, top: -175 },
+  { left: 375, top: -175 },
+  { left: 475, top: -175 },
+  { left: 575, top: -175 },
+  { left: 675, top: -175 },
+  { left: 775, top: -175 },
+  { left: 875, top: -175 },
+  { left: 975, top: -175 },
+
+  { left: 175, top: -100 },
+  { left: 275, top: -100 },
+  { left: 375, top: -100 },
+  { left: 475, top: -100 },
+  { left: 575, top: -100 },
+  { left: 675, top: -100 },
+  { left: 775, top: -100 },
+  { left: 875, top: -100 },
+  { left: 975, top: -100 },
+
+  { left: 175, top: -25 },
+  { left: 275, top: -25 },
+  { left: 375, top: -25 },
+  { left: 475, top: -25 },
+  { left: 575, top: -25 },
+  { left: 675, top: -25 },
+  { left: 775, top: -25 },
+  { left: 875, top: -25 },
+  { left: 975, top: -25 }
+];
+
+let heroes = [
+  { left: 160, top: 400 },
+  { left: 360, top: 400 },
+  { left: 560, top: 400 },
+  { left: 760, top: 400 },
+  { left: 960, top: 400 }
 ];
 
 document.onkeydown = e => {
@@ -60,7 +73,7 @@ const drawBojo = () => {
 
 const drawLooRolls = () => {
   document.getElementById("looRolls").innerHTML = "";
-  for (var i = 0; i < looRolls.length; i++) {
+  for (let i = 0; i < looRolls.length; i++) {
     document.getElementById(
       "looRolls"
     ).innerHTML += `<div class='looRoll' style='left:${looRolls[i].left}px; top:${looRolls[i].top}px'></div>`;
@@ -68,14 +81,23 @@ const drawLooRolls = () => {
 };
 
 const moveLooRolls = () => {
-  for (var i = 0; i < looRolls.length; i++) {
+  for (let i = 0; i < looRolls.length; i++) {
     looRolls[i].top = looRolls[i].top - 8;
+  }
+};
+
+const drawNHS = () => {
+  document.getElementById("heroes").innherHTML = "";
+  for (let i = 0; i < heroes.length; i++) {
+    document.getElementById(
+      "heroes"
+    ).innerHTML += `<div class='nhs' style='left:${heroes[i].left}px; top:${heroes[i].top}px'></div>`;
   }
 };
 
 const drawEnemies = () => {
   document.getElementById("enemies").innerHTML = "";
-  for (var i = 0; i < enemies.length; i++) {
+  for (let i = 0; i < enemies.length; i++) {
     document.getElementById(
       "enemies"
     ).innerHTML += `<div class='covid' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
@@ -83,14 +105,15 @@ const drawEnemies = () => {
 };
 
 const moveEnemies = () => {
-  for (var i = 0; i < enemies.length; i++) {
+  for (let i = 0; i < enemies.length; i++) {
     enemies[i].top = enemies[i].top + 1;
+    // enemies[i].left = enemies[i].left + 1;
   }
 };
 
-const collisionDetection = () => {
-  for (var covid = 0; covid < enemies.length; covid++) {
-    for (var looRoll = 0; looRoll < looRolls.length; looRoll++) {
+const enemyCollisionDetection = () => {
+  for (let covid = 0; covid < enemies.length; covid++) {
+    for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
       if (
         looRolls[looRoll].left >= enemies[covid].left - 15 &&
         looRolls[looRoll].left <= enemies[covid].left + 40 &&
@@ -105,13 +128,32 @@ const collisionDetection = () => {
   }
 };
 
+// const heroesCollisionDetection = () => {
+//   for (let covid = 0; covid < enemies.length; covid++) {
+//     for (let nhs = 0; nhs < heroes.length; nhs++) {
+//       if (
+//         heroes[nhs].left >= enemies[covid].left - 15 &&
+//         heroes[nhs].left <= enemies[covid].left + 40 &&
+//         heroes[nhs].top <= enemies[covid].top + 40 &&
+//         heroes[nhs].top >= enemies[covid].top
+//       ) {
+//         enemies.splice(covid, 1);
+//         heroes.splice(nhs, 1);
+//         // document.getElementById("getStuffed").play();
+//       }
+//     }
+//   }
+// };
+
 const gameLoop = () => {
   setTimeout(gameLoop, 100);
   moveLooRolls();
   drawLooRolls();
   moveEnemies();
+  drawNHS();
   drawEnemies();
-  collisionDetection();
+  // heroesCollisionDetection();
+  enemyCollisionDetection();
 };
 
 gameLoop();
