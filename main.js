@@ -48,6 +48,9 @@ let heroes = [
 const background = document.getElementById("background");
 const container = document.getElementById("enemies");
 
+const sectionWidth = background.clientWidth;
+const sectionHeight = background.clientHeight;
+
 document.onkeydown = e => {
   if (e.keyCode === 37) {
     bojo.left = bojo.left - 10;
@@ -103,24 +106,47 @@ const drawEnemies = () => {
     ).innerHTML += `<div class='covid' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
   }
 };
-const sectionWidth = background.clientWidth;
-const sectionHeight = background.clientHeight;
 
 const moveEnemies = () => {
-  for (let covid = 0; covid < enemies.length; covid++) {
-    if (enemies[covid].left <= sectionWidth - 80) {
-      enemies[covid].left = enemies[covid].left + 1;
-    } else if (enemies[covid].top <= sectionHeight - 650) {
-      enemies[covid].top = enemies[covid].top + 1;
-    } else if (enemies[covid].left >= sectionWidth - 800) {
-      enemies[covid].left = enemies[covid].left - 1;
-    }
+  if (
+    enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+    enemies[enemies.length - 1].top <= sectionHeight - 650
+  ) {
+    enemies.forEach(enemy => {
+      enemy.left = enemy.left + 1;
+    });
+  } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
+    enemies.forEach(enemy => {
+      enemy.top = enemy.top + 1;
+    });
+  } else if (
+    // enemies[enemies.length - 1].left <= sectionWidth &&
+    enemies[0].left >= sectionWidth - 1120
+  ) {
+    enemies.forEach(enemy => {
+      enemy.left = enemy.left - 1;
+    });
+  } else if (
+    // enemies[0].left <= sectionWidth - 1120 &&
+    enemies[0].top <=
+    sectionHeight - 725
+  ) {
+    enemies.forEach(enemy => {
+      enemy.top = enemy.top + 1;
+    });
+  } else if (
+    enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+    enemies[0].left >= sectionWidth - 1100
+  ) {
+    enemies.forEach(enemy => {
+      enemy.left = enemy.left + 1;
+    });
   }
 };
 
 const enemyCollisionDetection = () => {
-  for (let covid = 0; covid < enemies.length; covid++) {
-    for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
+  for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
+    for (let covid = 0; covid < enemies.length; covid++) {
       if (
         looRolls[looRoll].left >= enemies[covid].left - 15 &&
         looRolls[looRoll].left <= enemies[covid].left + 40 &&
@@ -135,30 +161,30 @@ const enemyCollisionDetection = () => {
   }
 };
 
-const heroesCollisionDetection = () => {
-  for (covid = 0; covid < enemies.length; covid++) {
-    for (let nhs = 0; nhs < heroes.length; nhs++) {
-      if (
-        heroes[nhs].left >= enemies[covid].left - 15 &&
-        heroes[nhs].left <= enemies[covid].left + 40 &&
-        heroes[nhs].top <= enemies[covid].top + 40 &&
-        heroes[nhs].top >= enemies[covid].top
-      ) {
-        enemies.splice(covid, 1);
-        heroes.splice(nhs, 1);
-      }
-    }
-  }
-};
+// const heroesCollisionDetection = () => {
+//   for (covid = 0; covid < enemies.length; covid++) {
+//     for (let nhs = 0; nhs < heroes.length; nhs++) {
+//       if (
+//         heroes[nhs].left >= enemies[covid].left - 15 &&
+//         heroes[nhs].left <= enemies[covid].left + 40 &&
+//         heroes[nhs].top <= enemies[covid].top + 40 &&
+//         heroes[nhs].top >= enemies[covid].top
+//       ) {
+//         enemies.splice(covid, 1);
+//         heroes.splice(nhs, 1);
+//       }
+//     }
+//   }
+// };
 
 const gameLoop = () => {
-  setTimeout(gameLoop, 30);
+  setTimeout(gameLoop, 20);
+  // drawNHS();
   moveLooRolls();
   drawLooRolls();
-  moveEnemies();
-  drawNHS();
   drawEnemies();
-  heroesCollisionDetection();
+  moveEnemies();
+  // heroesCollisionDetection();
   enemyCollisionDetection();
 };
 
