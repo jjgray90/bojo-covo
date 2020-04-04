@@ -120,26 +120,33 @@ const moveEnemies = () => {
       enemy.top = enemy.top + 1;
     });
   } else if (
-    // enemies[enemies.length - 1].left <= sectionWidth &&
-    enemies[0].left >= sectionWidth - 1120
+    enemies[enemies.length - 1].top <= sectionHeight - 575 &&
+    enemies[enemies.length - 1].left >= sectionWidth - 350
   ) {
     enemies.forEach(enemy => {
       enemy.left = enemy.left - 1;
     });
-  } else if (
-    // enemies[0].left <= sectionWidth - 1120 &&
-    enemies[0].top <=
-    sectionHeight - 725
-  ) {
+  } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
     enemies.forEach(enemy => {
       enemy.top = enemy.top + 1;
     });
   } else if (
     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-    enemies[0].left >= sectionWidth - 1100
+    enemies[enemies.length - 1].top > sectionHeight - 1200
   ) {
     enemies.forEach(enemy => {
       enemy.left = enemy.left + 1;
+    });
+  } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
+    enemies.forEach(enemy => {
+      enemy.top = enemy.top + 1;
+    });
+  } else if (
+    enemies[enemies.length - 1].top <= sectionHeight - 425 &&
+    enemies[enemies.length - 1].left >= sectionWidth - 350
+  ) {
+    enemies.forEach(enemy => {
+      enemy.left = enemy.left - 1;
     });
   }
 };
@@ -178,7 +185,7 @@ const enemyCollisionDetection = () => {
 // };
 
 const gameLoop = () => {
-  setTimeout(gameLoop, 20);
+  setTimeout(gameLoop, 3);
   // drawNHS();
   moveLooRolls();
   drawLooRolls();
