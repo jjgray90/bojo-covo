@@ -6,6 +6,15 @@ let bojo = {
 let looRolls = [];
 
 let enemies = [
+  { left: 95, top: -250 },
+  { left: 195, top: -250 },
+  { left: 295, top: -250 },
+  { left: 395, top: -250 },
+  { left: 495, top: -250 },
+  { left: 595, top: -250 },
+  { left: 695, top: -250 },
+  { left: 795, top: -250 },
+  { left: 895, top: -250 },
   { left: 95, top: -175 },
   { left: 195, top: -175 },
   { left: 295, top: -175 },
@@ -36,11 +45,11 @@ let enemies = [
 ];
 
 let heroes = [
-  { left: 160, top: 400 },
-  { left: 360, top: 400 },
-  { left: 560, top: 400 },
-  { left: 760, top: 400 },
-  { left: 960, top: 400 },
+  { left: 160, top: 50 },
+  { left: 360, top: 50 },
+  { left: 560, top: 50 },
+  { left: 760, top: 50 },
+  { left: 960, top: 50 },
 ];
 
 const background = document.getElementById("background");
@@ -95,6 +104,12 @@ const drawNHS = () => {
     ).innerHTML += `<div class='nhs' style='left:${heroes[i].left}px; top:${heroes[i].top}px'></div>`;
   }
 };
+
+// const moveNHS = () => {
+//   for (let i = 0; i < heroes.length; i++) {
+//     heroes[i].top = heroes[i].top;
+//   }
+// };
 
 const drawEnemies = () => {
   document.getElementById("enemies").innerHTML = "";
@@ -173,9 +188,9 @@ const enemyCollisionDetection = () => {
   for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
     for (let covid = 0; covid < enemies.length; covid++) {
       if (
-        looRolls[looRoll].left >= enemies[covid].left - 15 &&
-        looRolls[looRoll].left <= enemies[covid].left + 40 &&
-        looRolls[looRoll].top <= enemies[covid].top + 40 &&
+        looRolls[looRoll].left >= enemies[covid].left - 10 &&
+        looRolls[looRoll].left <= enemies[covid].left + 30 &&
+        looRolls[looRoll].top <= enemies[covid].top + 30 &&
         looRolls[looRoll].top >= enemies[covid].top
       ) {
         enemies.splice(covid, 1);
@@ -210,17 +225,55 @@ const changeDirection = () => {
   } else direction++;
 };
 
-setInterval(changeDirection, 4000);
+const winner = () => alert("Congrats, Boris!");
+const loser = () => alert("You're shit Boris");
 
+const winGame = () => {
+  if (enemies.length <= 0) {
+    document.getElementById("lipSmacking").play();
+    clearTimeout(timeLoop);
+    setTimeout(winner, 2000);
+  } else {
+    ("");
+  }
+};
+
+const loseGame = () => {
+  for (let covid = 0; covid < enemies.length; covid++) {
+    if (
+      bojo.left >= enemies[covid].left - 40 &&
+      bojo.left <= enemies[covid].left + 40 &&
+      bojo.top <= enemies[covid].top + 40 &&
+      bojo.top >= enemies[covid].top
+    ) {
+      document.getElementById("someDrugs").play();
+      clearTimeout(timeLoop);
+      setTimeout(loser, 2000);
+    } else {
+      ("");
+    }
+  }
+};
+
+setInterval(changeDirection, 4000);
+let timeLoop;
 const gameLoop = () => {
-  setTimeout(gameLoop, 100);
+  // moveNHS();
   // drawNHS();
-  moveLooRolls();
   drawLooRolls();
+  moveLooRolls();
   drawEnemies();
   moveEnemies();
   // heroesCollisionDetection();
+  timeLoop = setTimeout(gameLoop, 100);
   enemyCollisionDetection();
+  winGame();
+  loseGame();
 };
 
 gameLoop();
+
+// startGame = () => {
+//   document.getElementById("streetsSafer").play();
+//   setTimeout(gameLoop, 4000);
+// };
