@@ -1,40 +1,38 @@
 let bojo = {
   left: 570,
-  top: 525
+  top: 525,
 };
 
 let looRolls = [];
 
 let enemies = [
-  { left: 175, top: -175 },
-  { left: 275, top: -175 },
-  { left: 375, top: -175 },
-  { left: 475, top: -175 },
-  { left: 575, top: -175 },
-  { left: 675, top: -175 },
-  { left: 775, top: -175 },
-  { left: 875, top: -175 },
-  { left: 975, top: -175 },
-
-  { left: 175, top: -100 },
-  { left: 275, top: -100 },
-  { left: 375, top: -100 },
-  { left: 475, top: -100 },
-  { left: 575, top: -100 },
-  { left: 675, top: -100 },
-  { left: 775, top: -100 },
-  { left: 875, top: -100 },
-  { left: 975, top: -100 },
-
-  { left: 175, top: -25 },
-  { left: 275, top: -25 },
-  { left: 375, top: -25 },
-  { left: 475, top: -25 },
-  { left: 575, top: -25 },
-  { left: 675, top: -25 },
-  { left: 775, top: -25 },
-  { left: 875, top: -25 },
-  { left: 975, top: -25 }
+  { left: 95, top: -175 },
+  { left: 195, top: -175 },
+  { left: 295, top: -175 },
+  { left: 395, top: -175 },
+  { left: 495, top: -175 },
+  { left: 595, top: -175 },
+  { left: 695, top: -175 },
+  { left: 795, top: -175 },
+  { left: 895, top: -175 },
+  { left: 95, top: -100 },
+  { left: 195, top: -100 },
+  { left: 295, top: -100 },
+  { left: 395, top: -100 },
+  { left: 495, top: -100 },
+  { left: 595, top: -100 },
+  { left: 695, top: -100 },
+  { left: 795, top: -100 },
+  { left: 895, top: -100 },
+  { left: 95, top: -25 },
+  { left: 195, top: -25 },
+  { left: 295, top: -25 },
+  { left: 395, top: -25 },
+  { left: 495, top: -25 },
+  { left: 595, top: -25 },
+  { left: 695, top: -25 },
+  { left: 795, top: -25 },
+  { left: 895, top: -25 },
 ];
 
 let heroes = [
@@ -42,7 +40,7 @@ let heroes = [
   { left: 360, top: 400 },
   { left: 560, top: 400 },
   { left: 760, top: 400 },
-  { left: 960, top: 400 }
+  { left: 960, top: 400 },
 ];
 
 const background = document.getElementById("background");
@@ -51,7 +49,7 @@ const container = document.getElementById("enemies");
 const sectionWidth = background.clientWidth;
 const sectionHeight = background.clientHeight;
 
-document.onkeydown = e => {
+document.onkeydown = (e) => {
   if (e.keyCode === 37) {
     bojo.left = bojo.left - 10;
   }
@@ -61,7 +59,7 @@ document.onkeydown = e => {
   if (e.keyCode === 32) {
     looRolls.push({
       left: bojo.left + 20,
-      top: bojo.top - 20
+      top: bojo.top - 20,
     });
     document.getElementById("fire").play();
     drawLooRolls();
@@ -85,7 +83,7 @@ const drawLooRolls = () => {
 
 const moveLooRolls = () => {
   for (let i = 0; i < looRolls.length; i++) {
-    looRolls[i].top = looRolls[i].top - 8;
+    looRolls[i].top = looRolls[i].top - 12;
   }
 };
 
@@ -108,47 +106,67 @@ const drawEnemies = () => {
 };
 
 const moveEnemies = () => {
-  if (
-    enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-    enemies[enemies.length - 1].top <= sectionHeight - 650
-  ) {
-    enemies.forEach(enemy => {
-      enemy.left = enemy.left + 1;
-    });
-  } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
-    enemies.forEach(enemy => {
-      enemy.top = enemy.top + 1;
-    });
-  } else if (
-    enemies[enemies.length - 1].top <= sectionHeight - 575 &&
-    enemies[enemies.length - 1].left >= sectionWidth - 350
-  ) {
-    enemies.forEach(enemy => {
-      enemy.left = enemy.left - 1;
-    });
-  } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
-    enemies.forEach(enemy => {
-      enemy.top = enemy.top + 1;
-    });
-  } else if (
-    enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-    enemies[enemies.length - 1].top > sectionHeight - 1200
-  ) {
-    enemies.forEach(enemy => {
-      enemy.left = enemy.left + 1;
-    });
-  } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
-    enemies.forEach(enemy => {
-      enemy.top = enemy.top + 1;
-    });
-  } else if (
-    enemies[enemies.length - 1].top <= sectionHeight - 425 &&
-    enemies[enemies.length - 1].left >= sectionWidth - 350
-  ) {
-    enemies.forEach(enemy => {
-      enemy.left = enemy.left - 1;
-    });
+  switch (direction) {
+    case 2:
+      enemies.forEach((enemy) => {
+        enemy.left = enemy.left - 4;
+      });
+      break;
+    case 4:
+      enemies.forEach((enemy) => {
+        enemy.left = enemy.left + 4;
+      });
+      break;
+    default:
+      enemies.forEach((enemy) => {
+        enemy.top = enemy.top + 1;
+      });
   }
+
+  // early version of logic to move enemies
+
+  // if (
+  //   enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+  //   enemies[enemies.length - 1].top <= sectionHeight - 650
+  // ) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.left = enemy.left + 1;
+  //   });
+  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.top = enemy.top + 1;
+  //   });
+  // } else if (
+  //   enemies[enemies.length - 1].top <= sectionHeight - 575 &&
+  //   enemies[enemies.length - 1].left >= sectionWidth - 350
+  // ) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.left = enemy.left - 1;
+  //   });
+  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.top = enemy.top + 1;
+  //   });
+  // } else if (
+  //   enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+  //   enemies[enemies.length - 1].top > sectionHeight - 1200
+  // ) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.left = enemy.left + 1;
+  //   });
+  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.top = enemy.top + 1;
+  //   });
+  // } else if (
+  //   enemies[enemies.length - 1].top <=
+  //   sectionHeight - 425
+  //   // enemies[enemies.length - 1].left >= sectionWidth - 350
+  // ) {
+  //   enemies.forEach((enemy) => {
+  //     enemy.left = enemy.left - 1;
+  //   });
+  // }
 };
 
 const enemyCollisionDetection = () => {
@@ -184,8 +202,18 @@ const enemyCollisionDetection = () => {
 //   }
 // };
 
+let direction = 4;
+
+const changeDirection = () => {
+  if (direction == 4) {
+    direction = 1;
+  } else direction++;
+};
+
+setInterval(changeDirection, 4000);
+
 const gameLoop = () => {
-  setTimeout(gameLoop, 3);
+  setTimeout(gameLoop, 100);
   // drawNHS();
   moveLooRolls();
   drawLooRolls();
