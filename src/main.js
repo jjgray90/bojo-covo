@@ -45,11 +45,11 @@ let enemies = [
 ];
 
 let heroes = [
-  { left: 160, top: 50 },
-  { left: 360, top: 50 },
-  { left: 560, top: 50 },
-  { left: 760, top: 50 },
-  { left: 960, top: 50 },
+  { left: 160, top: 400 },
+  { left: 360, top: 400 },
+  { left: 560, top: 400 },
+  { left: 760, top: 400 },
+  { left: 960, top: 400 },
 ];
 
 const background = document.getElementById("background");
@@ -97,19 +97,13 @@ const moveLooRolls = () => {
 };
 
 const drawNHS = () => {
-  document.getElementById("heroes").innherHTML = "";
+  document.getElementById("heroes").innerHTML = "";
   for (let i = 0; i < heroes.length; i++) {
     document.getElementById(
       "heroes"
     ).innerHTML += `<div class='nhs' style='left:${heroes[i].left}px; top:${heroes[i].top}px'></div>`;
   }
 };
-
-// const moveNHS = () => {
-//   for (let i = 0; i < heroes.length; i++) {
-//     heroes[i].top = heroes[i].top;
-//   }
-// };
 
 const drawEnemies = () => {
   document.getElementById("enemies").innerHTML = "";
@@ -137,52 +131,53 @@ const moveEnemies = () => {
         enemy.top = enemy.top + 1;
       });
   }
-
-  // early version of logic to move enemies
-
-  // if (
-  //   enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-  //   enemies[enemies.length - 1].top <= sectionHeight - 650
-  // ) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.left = enemy.left + 1;
-  //   });
-  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.top = enemy.top + 1;
-  //   });
-  // } else if (
-  //   enemies[enemies.length - 1].top <= sectionHeight - 575 &&
-  //   enemies[enemies.length - 1].left >= sectionWidth - 350
-  // ) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.left = enemy.left - 1;
-  //   });
-  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.top = enemy.top + 1;
-  //   });
-  // } else if (
-  //   enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-  //   enemies[enemies.length - 1].top > sectionHeight - 1200
-  // ) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.left = enemy.left + 1;
-  //   });
-  // } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.top = enemy.top + 1;
-  //   });
-  // } else if (
-  //   enemies[enemies.length - 1].top <=
-  //   sectionHeight - 425
-  //   // enemies[enemies.length - 1].left >= sectionWidth - 350
-  // ) {
-  //   enemies.forEach((enemy) => {
-  //     enemy.left = enemy.left - 1;
-  //   });
-  // }
 };
+
+// early version of logic to move enemies
+
+//   if (
+//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+//     enemies[enemies.length - 1].top <= sectionHeight - 650
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left + 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].top <= sectionHeight - 575 &&
+//     enemies[enemies.length - 1].left >= sectionWidth - 350
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left - 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+//     enemies[enemies.length - 1].top > sectionHeight - 1200
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left + 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].top <=
+//     sectionHeight - 425
+//     // enemies[enemies.length - 1].left >= sectionWidth - 350
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left - 1;
+//     });
+//   }
+// };
 
 const enemyCollisionDetection = () => {
   for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
@@ -201,21 +196,38 @@ const enemyCollisionDetection = () => {
   }
 };
 
-// const heroesCollisionDetection = () => {
-//   for (covid = 0; covid < enemies.length; covid++) {
-//     for (let nhs = 0; nhs < heroes.length; nhs++) {
-//       if (
-//         heroes[nhs].left >= enemies[covid].left - 15 &&
-//         heroes[nhs].left <= enemies[covid].left + 40 &&
-//         heroes[nhs].top <= enemies[covid].top + 40 &&
-//         heroes[nhs].top >= enemies[covid].top
-//       ) {
-//         enemies.splice(covid, 1);
-//         heroes.splice(nhs, 1);
-//       }
-//     }
-//   }
-// };
+const heroesCollisionDetection = () => {
+  for (covid = 0; covid < enemies.length; covid++) {
+    for (let nhs = 0; nhs < heroes.length; nhs++) {
+      if (
+        heroes[nhs].left >= enemies[covid].left - 15 &&
+        heroes[nhs].left <= enemies[covid].left + 40 &&
+        heroes[nhs].top <= enemies[covid].top + 40 &&
+        heroes[nhs].top >= enemies[covid].top
+      ) {
+        enemies.splice(covid, 1);
+        heroes.splice(nhs, 1);
+      }
+    }
+  }
+};
+
+const friendlyFire = () => {
+  for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
+    for (let nhs = 0; nhs < heroes.length; nhs++) {
+      if (
+        looRolls[looRoll].left >= heroes[nhs].left - 20 &&
+        looRolls[looRoll].left <= heroes[nhs].left + 70 &&
+        looRolls[looRoll].top <= heroes[nhs].top + 30 &&
+        looRolls[looRoll].top >= heroes[nhs].top
+      ) {
+        heroes.splice(nhs, 1);
+        looRolls.splice(looRoll, 1);
+        document.getElementById("blitheringIdiot").play();
+      }
+    }
+  }
+};
 
 let direction = 4;
 
@@ -241,14 +253,16 @@ const winGame = () => {
 const loseGame = () => {
   for (let covid = 0; covid < enemies.length; covid++) {
     if (
-      bojo.left >= enemies[covid].left - 40 &&
-      bojo.left <= enemies[covid].left + 40 &&
-      bojo.top <= enemies[covid].top + 40 &&
-      bojo.top >= enemies[covid].top
+      (bojo.left >= enemies[covid].left - 40 &&
+        bojo.left <= enemies[covid].left + 40 &&
+        bojo.top <= enemies[covid].top + 40 &&
+        bojo.top >= enemies[covid].top) ||
+      enemies[covid].top >= sectionHeight
     ) {
       document.getElementById("someDrugs").play();
       clearTimeout(timeLoop);
       setTimeout(loser, 2000);
+      break;
     } else {
       ("");
     }
@@ -257,16 +271,17 @@ const loseGame = () => {
 
 setInterval(changeDirection, 4000);
 let timeLoop;
+
 const gameLoop = () => {
-  // moveNHS();
-  // drawNHS();
+  drawNHS();
   drawLooRolls();
   moveLooRolls();
   drawEnemies();
   moveEnemies();
-  // heroesCollisionDetection();
   timeLoop = setTimeout(gameLoop, 100);
+  heroesCollisionDetection();
   enemyCollisionDetection();
+  friendlyFire();
   winGame();
   loseGame();
 };
