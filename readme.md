@@ -1,14 +1,13 @@
-# Project Title
+# Bojo Covo
 
-One Paragraph of project description goes here
+A personal interest project I started one weekend during the national lockdown in March 2020. The project allowed me to consolidate my javascript knowledge and introduce me to animation in js.
 
-## Getting Started
+### Tech Stack
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+- HTML
+- CSS
+- JavaScript
 
-### Prerequisites
-
-What things you need to install the software and how to install them
 
 ```
 Give examples
