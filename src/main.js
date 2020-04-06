@@ -242,9 +242,10 @@ const loser = () => alert("You're shit Boris");
 
 const winGame = () => {
   if (enemies.length <= 0) {
+    document.getElementById("button-container").className = "showButton";
     document.getElementById("lipSmacking").play();
     clearTimeout(timeLoop);
-    setTimeout(winner, 2000);
+    setTimeout(winner, 200);
   } else {
     ("");
   }
@@ -259,9 +260,11 @@ const loseGame = () => {
         bojo.top >= enemies[covid].top) ||
       enemies[covid].top >= sectionHeight
     ) {
+      toggleBtn();
+      document.getElementById("button-container").className = "showButton";
       document.getElementById("someDrugs").play();
       clearTimeout(timeLoop);
-      setTimeout(loser, 2000);
+      setTimeout(loser, 200);
       break;
     } else {
       ("");
@@ -269,7 +272,6 @@ const loseGame = () => {
   }
 };
 
-setInterval(changeDirection, 4000);
 let timeLoop;
 
 const gameLoop = () => {
@@ -286,9 +288,14 @@ const gameLoop = () => {
   loseGame();
 };
 
-gameLoop();
+toggleBtn = () => {
+  if (document.getElementById("button-container").className == "hideButton")
+    document.getElementById("button-container").className = "showButton";
+  else document.getElementById("button-container").className = "hideButton";
+};
 
-// startGame = () => {
-//   document.getElementById("streetsSafer").play();
-//   setTimeout(gameLoop, 4000);
-// };
+startGame = () => {
+  document.getElementById("streetsSafer").play();
+  setInterval(changeDirection, 4000);
+  gameLoop();
+};
