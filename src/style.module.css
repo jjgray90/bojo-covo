@@ -74,6 +74,26 @@ body #button-container #btn:hover {
   cursor: pointer;
 }
 
+body #button-container #points {
+  text-align: justify;
+  padding: 10px;
+  background-color: lightcoral;
+}
+
+body #button-container #points h4 {
+  padding-bottom: 5px;
+}
+
+body #button-container #points div {
+  padding: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 body #background {
   width: 100%;
   max-width: 1200px;
@@ -165,5 +185,27 @@ body #background #enemies .covid {
   background-image: url("assets/img/corona.png");
   background-size: cover;
   position: absolute;
+}
+
+body #score {
+  font-size: 25px;
+  margin-top: 10px;
+  padding: 10px;
+  color: white;
+  background-color: lightcoral;
+}
+
+body #score span {
+  font-size: 30px;
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: white;
+  color: red;
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    background-color: lightblue;
+  }
 }
 /*# sourceMappingURL=style.module.css.map */

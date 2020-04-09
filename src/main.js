@@ -1,3 +1,5 @@
+let score = 0;
+
 let bojo = {
   left: 570,
   top: 525,
@@ -6,42 +8,51 @@ let bojo = {
 let looRolls = [];
 
 let en = [
-  // { left: 95, top: -250 },
-  // { left: 195, top: -250 },
-  // { left: 295, top: -250 },
-  // { left: 395, top: -250 },
-  // { left: 495, top: -250 },
-  // { left: 595, top: -250 },
-  // { left: 695, top: -250 },
-  // { left: 795, top: -250 },
-  // { left: 895, top: -250 },
-  // { left: 95, top: -175 },
-  // { left: 195, top: -175 },
-  // { left: 295, top: -175 },
-  // { left: 395, top: -175 },
-  // { left: 495, top: -175 },
-  // { left: 595, top: -175 },
-  // { left: 695, top: -175 },
-  // { left: 795, top: -175 },
-  // { left: 895, top: -175 },
-  // { left: 95, top: -100 },
-  // { left: 195, top: -100 },
-  // { left: 295, top: -100 },
-  // { left: 395, top: -100 },
-  // { left: 495, top: -100 },
-  // { left: 595, top: -100 },
-  // { left: 695, top: -100 },
-  // { left: 795, top: -100 },
-  // { left: 895, top: -100 },
-  // { left: 95, top: -25 },
-  // { left: 195, top: -25 },
-  // { left: 295, top: -25 },
-  // { left: 395, top: -25 },
-  // { left: 495, top: -25 },
-  // { left: 595, top: -25 },
-  // { left: 695, top: -25 },
+  { left: 95, top: -250 },
+  { left: 195, top: -250 },
+  { left: 295, top: -250 },
+  { left: 395, top: -250 },
+  { left: 495, top: -250 },
+  { left: 595, top: -250 },
+  { left: 695, top: -250 },
+  { left: 795, top: -250 },
+  { left: 895, top: -250 },
+  { left: 95, top: -175 },
+  { left: 195, top: -175 },
+  { left: 295, top: -175 },
+  { left: 395, top: -175 },
+  { left: 495, top: -175 },
+  { left: 595, top: -175 },
+  { left: 695, top: -175 },
+  { left: 795, top: -175 },
+  { left: 895, top: -175 },
+  { left: 95, top: -100 },
+  { left: 195, top: -100 },
+  { left: 295, top: -100 },
+  { left: 395, top: -100 },
+  { left: 495, top: -100 },
+  { left: 595, top: -100 },
+  { left: 695, top: -100 },
+  { left: 795, top: -100 },
+  { left: 895, top: -100 },
+  { left: 95, top: -25 },
+  { left: 195, top: -25 },
+  { left: 295, top: -25 },
+  { left: 395, top: -25 },
+  { left: 495, top: -25 },
+  { left: 595, top: -25 },
+  { left: 695, top: -25 },
   { left: 795, top: -25 },
   { left: 895, top: -25 },
+  { left: 95, top: 50 },
+  { left: 195, top: 50 },
+  { left: 295, top: 50 },
+  { left: 395, top: 50 },
+  { left: 495, top: 50 },
+  { left: 595, top: 50 },
+  { left: 695, top: 50 },
+  { left: 795, top: 50 },
+  { left: 895, top: 50 },
 ];
 
 let enemies;
@@ -75,6 +86,7 @@ document.onkeydown = (e) => {
       top: bojo.top - 20,
     });
     document.getElementById("fire").play();
+    score = score - 1;
     drawLooRolls();
   }
   drawBojo();
@@ -146,6 +158,7 @@ const enemyCollisionDetection = () => {
         looRolls[looRoll].top <= enemies[covid].top + 30 &&
         looRolls[looRoll].top >= enemies[covid].top
       ) {
+        score = score + 4;
         enemies.splice(covid, 1);
         looRolls.splice(looRoll, 1);
         document.getElementById("getStuffed").play();
@@ -165,6 +178,7 @@ const heroesCollisionDetection = () => {
       ) {
         enemies.splice(covid, 1);
         heroes.splice(nhs, 1);
+        score = score - 10;
       }
     }
   }
@@ -181,6 +195,7 @@ const friendlyFire = () => {
       ) {
         heroes.splice(nhs, 1);
         looRolls.splice(looRoll, 1);
+        score = score - 15;
         document.getElementById("blitheringIdiot").play();
       }
     }
@@ -195,7 +210,8 @@ const changeDirection = () => {
   } else direction++;
 };
 
-const winner = () => alert("Congrats, Boris!");
+const winner = () =>
+  alert("Congrats, Boris! You scored " + score + " political points!");
 const loser = () => alert("You're shit Boris");
 
 let removeAllFromPage = () => {
@@ -250,6 +266,7 @@ const gameLoop = () => {
   heroesCollisionDetection();
   enemyCollisionDetection();
   friendlyFire();
+  updateHtmlScore();
   winGame();
   loseGame();
 };
@@ -261,6 +278,7 @@ toggleBtn = () => {
 };
 
 startGame = () => {
+  score = 0;
   document.getElementById("streetsSafer").play();
   heroes = [...h];
   // enemies = JSON.parse(JSON.stringify(en));
@@ -269,6 +287,13 @@ startGame = () => {
   direction = 4;
   gameLoop();
 };
+
+const updateHtmlScore = () => {
+  document.getElementById("score").innerHTML =
+    "<p>POLITICAL POINTS " + "<span>" + score + "</span>" + "</p>";
+};
+
+updateHtmlScore();
 
 // early version of logic to move enemies
 
