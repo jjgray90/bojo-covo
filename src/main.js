@@ -5,7 +5,7 @@ let bojo = {
 
 let looRolls = [];
 
-let enemies = [
+let en = [
   { left: 95, top: -250 },
   { left: 195, top: -250 },
   { left: 295, top: -250 },
@@ -44,13 +44,17 @@ let enemies = [
   { left: 895, top: -25 },
 ];
 
-let heroes = [
+let enemies;
+
+let h = [
   { left: 160, top: 400 },
   { left: 360, top: 400 },
   { left: 560, top: 400 },
   { left: 760, top: 400 },
   { left: 960, top: 400 },
 ];
+
+let heroes;
 
 const background = document.getElementById("background");
 const container = document.getElementById("enemies");
@@ -133,52 +137,6 @@ const moveEnemies = () => {
   }
 };
 
-// early version of logic to move enemies
-
-//   if (
-//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-//     enemies[enemies.length - 1].top <= sectionHeight - 650
-//   ) {
-//     enemies.forEach((enemy) => {
-//       enemy.left = enemy.left + 1;
-//     });
-//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
-//     enemies.forEach((enemy) => {
-//       enemy.top = enemy.top + 1;
-//     });
-//   } else if (
-//     enemies[enemies.length - 1].top <= sectionHeight - 575 &&
-//     enemies[enemies.length - 1].left >= sectionWidth - 350
-//   ) {
-//     enemies.forEach((enemy) => {
-//       enemy.left = enemy.left - 1;
-//     });
-//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
-//     enemies.forEach((enemy) => {
-//       enemy.top = enemy.top + 1;
-//     });
-//   } else if (
-//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
-//     enemies[enemies.length - 1].top > sectionHeight - 1200
-//   ) {
-//     enemies.forEach((enemy) => {
-//       enemy.left = enemy.left + 1;
-//     });
-//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
-//     enemies.forEach((enemy) => {
-//       enemy.top = enemy.top + 1;
-//     });
-//   } else if (
-//     enemies[enemies.length - 1].top <=
-//     sectionHeight - 425
-//     // enemies[enemies.length - 1].left >= sectionWidth - 350
-//   ) {
-//     enemies.forEach((enemy) => {
-//       enemy.left = enemy.left - 1;
-//     });
-//   }
-// };
-
 const enemyCollisionDetection = () => {
   for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
     for (let covid = 0; covid < enemies.length; covid++) {
@@ -240,8 +198,15 @@ const changeDirection = () => {
 const winner = () => alert("Congrats, Boris!");
 const loser = () => alert("You're shit Boris");
 
+let removeAllFromPage = () => {
+  looRolls.splice(0, looRolls.length);
+  enemies.splice(0, enemies.length);
+  heroes.splice(0, heroes.length);
+};
+
 const winGame = () => {
-  if (enemies.length <= 0) {
+  if (enemies.length == 0) {
+    removeAllFromPage();
     document.getElementById("button-container").className = "showButton";
     document.getElementById("lipSmacking").play();
     clearTimeout(timeLoop);
@@ -260,7 +225,8 @@ const loseGame = () => {
         bojo.top >= enemies[covid].top) ||
       enemies[covid].top >= sectionHeight
     ) {
-      toggleBtn();
+      covid = 0;
+      removeAllFromPage();
       document.getElementById("button-container").className = "showButton";
       document.getElementById("someDrugs").play();
       clearTimeout(timeLoop);
@@ -296,6 +262,55 @@ toggleBtn = () => {
 
 startGame = () => {
   document.getElementById("streetsSafer").play();
+  heroes = [...h];
+  enemies = JSON.parse(JSON.stringify(en));
   setInterval(changeDirection, 4000);
+  direction = 4;
   gameLoop();
 };
+
+// early version of logic to move enemies
+
+//   if (
+//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+//     enemies[enemies.length - 1].top <= sectionHeight - 650
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left + 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 650) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].top <= sectionHeight - 575 &&
+//     enemies[enemies.length - 1].left >= sectionWidth - 350
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left - 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 575) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].left <= sectionWidth - 120 &&
+//     enemies[enemies.length - 1].top > sectionHeight - 1200
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left + 1;
+//     });
+//   } else if (enemies[enemies.length - 1].top <= sectionHeight - 500) {
+//     enemies.forEach((enemy) => {
+//       enemy.top = enemy.top + 1;
+//     });
+//   } else if (
+//     enemies[enemies.length - 1].top <=
+//     sectionHeight - 425
+//     // enemies[enemies.length - 1].left >= sectionWidth - 350
+//   ) {
+//     enemies.forEach((enemy) => {
+//       enemy.left = enemy.left - 1;
+//     });
+//   }
+// };
