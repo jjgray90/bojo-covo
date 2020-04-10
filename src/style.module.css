@@ -26,11 +26,34 @@ body {
 
 body #button-container {
   z-index: 10;
-  color: white;
   position: absolute;
   height: 100vh;
   width: 100%;
   background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body #button-container.showButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body #button-container.hideButton {
+  display: none;
+}
+
+body #button-container #start-flex {
+  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,25 +67,15 @@ body #button-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 200px 0;
   text-align: center;
+  height: 60vh;
 }
 
-body #button-container.showButton {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-body #button-container.hideButton {
-  display: none;
-}
-
-body #button-container #device {
+body #button-container #start-flex #device {
   font-size: 0.6em;
 }
 
-body #button-container #btn {
+body #button-container #start-flex #btn {
   z-index: 200000;
   color: black;
   background-color: white;
@@ -70,21 +83,21 @@ body #button-container #btn {
   padding: 10px 20px;
 }
 
-body #button-container #btn:hover {
+body #button-container #start-flex #btn:hover {
   cursor: pointer;
 }
 
-body #button-container #points {
+body #button-container #start-flex #points {
   text-align: justify;
   padding: 10px;
   background-color: lightcoral;
 }
 
-body #button-container #points h4 {
+body #button-container #start-flex #points h4 {
   padding-bottom: 5px;
 }
 
-body #button-container #points div {
+body #button-container #start-flex #points div {
   padding: 2px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -112,7 +125,7 @@ body #background #bojo {
   background-size: cover;
   position: absolute;
   left: 570px;
-  top: 525px;
+  bottom: 30px;
   -webkit-animation-name: bojoWiggle;
           animation-name: bojoWiggle;
   -webkit-animation-duration: 1s;
@@ -188,6 +201,7 @@ body #background #enemies .covid {
 }
 
 body #score {
+  height: 50px;
   font-size: 25px;
   margin-top: 10px;
   padding: 10px;

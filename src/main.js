@@ -1,77 +1,79 @@
+const windowHeight = window.innerHeight - 50;
+
 let score = 0;
 
 let bojo = {
   left: 570,
-  top: 525,
+  bottom: 30,
 };
 
 let looRolls = [];
 
 let en = [
-  { left: 95, top: -250 },
-  { left: 195, top: -250 },
-  { left: 295, top: -250 },
-  { left: 395, top: -250 },
-  { left: 495, top: -250 },
-  { left: 595, top: -250 },
-  { left: 695, top: -250 },
-  { left: 795, top: -250 },
-  { left: 895, top: -250 },
-  { left: 95, top: -175 },
-  { left: 195, top: -175 },
-  { left: 295, top: -175 },
-  { left: 395, top: -175 },
-  { left: 495, top: -175 },
-  { left: 595, top: -175 },
-  { left: 695, top: -175 },
-  { left: 795, top: -175 },
-  { left: 895, top: -175 },
-  { left: 95, top: -100 },
-  { left: 195, top: -100 },
-  { left: 295, top: -100 },
-  { left: 395, top: -100 },
-  { left: 495, top: -100 },
-  { left: 595, top: -100 },
-  { left: 695, top: -100 },
-  { left: 795, top: -100 },
-  { left: 895, top: -100 },
-  { left: 95, top: -25 },
-  { left: 195, top: -25 },
-  { left: 295, top: -25 },
-  { left: 395, top: -25 },
-  { left: 495, top: -25 },
-  { left: 595, top: -25 },
-  { left: 695, top: -25 },
-  { left: 795, top: -25 },
-  { left: 895, top: -25 },
-  { left: 95, top: 50 },
-  { left: 195, top: 50 },
-  { left: 295, top: 50 },
-  { left: 395, top: 50 },
-  { left: 495, top: 50 },
-  { left: 595, top: 50 },
-  { left: 695, top: 50 },
-  { left: 795, top: 50 },
-  { left: 895, top: 50 },
+  { left: 95, bottom: windowHeight + 150 },
+  { left: 195, bottom: windowHeight + 150 },
+  { left: 295, bottom: windowHeight + 150 },
+  { left: 395, bottom: windowHeight + 150 },
+  { left: 495, bottom: windowHeight + 150 },
+  { left: 595, bottom: windowHeight + 150 },
+  { left: 695, bottom: windowHeight + 150 },
+  { left: 795, bottom: windowHeight + 150 },
+  { left: 895, bottom: windowHeight + 150 },
+  { left: 95, bottom: windowHeight + 75 },
+  { left: 195, bottom: windowHeight + 75 },
+  { left: 295, bottom: windowHeight + 75 },
+  { left: 395, bottom: windowHeight + 75 },
+  { left: 495, bottom: windowHeight + 75 },
+  { left: 595, bottom: windowHeight + 75 },
+  { left: 695, bottom: windowHeight + 75 },
+  { left: 795, bottom: windowHeight + 75 },
+  { left: 895, bottom: windowHeight + 75 },
+  { left: 95, bottom: windowHeight },
+  { left: 195, bottom: windowHeight },
+  { left: 295, bottom: windowHeight },
+  { left: 395, bottom: windowHeight },
+  { left: 495, bottom: windowHeight },
+  { left: 595, bottom: windowHeight },
+  { left: 695, bottom: windowHeight },
+  { left: 795, bottom: windowHeight },
+  { left: 895, bottom: windowHeight },
+  { left: 95, bottom: windowHeight - 75 },
+  { left: 195, bottom: windowHeight - 75 },
+  { left: 295, bottom: windowHeight - 75 },
+  { left: 395, bottom: windowHeight - 75 },
+  { left: 495, bottom: windowHeight - 75 },
+  { left: 595, bottom: windowHeight - 75 },
+  { left: 695, bottom: windowHeight - 75 },
+  { left: 795, bottom: windowHeight - 75 },
+  { left: 895, bottom: windowHeight - 75 },
+  { left: 95, bottom: windowHeight - 150 },
+  { left: 195, bottom: windowHeight - 150 },
+  { left: 295, bottom: windowHeight - 150 },
+  { left: 395, bottom: windowHeight - 150 },
+  { left: 495, bottom: windowHeight - 150 },
+  { left: 595, bottom: windowHeight - 150 },
+  { left: 695, bottom: windowHeight - 150 },
+  { left: 795, bottom: windowHeight - 150 },
+  { left: 895, bottom: windowHeight - 150 },
 ];
 
 let enemies;
 
 let h = [
-  { left: 160, top: 400 },
-  { left: 360, top: 400 },
-  { left: 560, top: 400 },
-  { left: 760, top: 400 },
-  { left: 960, top: 400 },
+  { left: 160, bottom: 150 },
+  { left: 360, bottom: 150 },
+  { left: 560, bottom: 150 },
+  { left: 760, bottom: 150 },
+  { left: 960, bottom: 150 },
 ];
 
 let heroes;
 
-const background = document.getElementById("background");
-const container = document.getElementById("enemies");
+// const background = document.getElementById("background");
+// const container = document.getElementById("enemies");
 
-const sectionWidth = background.clientWidth;
-const sectionHeight = background.clientHeight;
+// const sectionWidth = background.clientWidth;
+// const sectionHeight = background.clientHeight;
 
 document.onkeydown = (e) => {
   if (e.keyCode === 37) {
@@ -83,7 +85,7 @@ document.onkeydown = (e) => {
   if (e.keyCode === 32) {
     looRolls.push({
       left: bojo.left + 20,
-      top: bojo.top - 20,
+      bottom: bojo.bottom + 20,
     });
     document.getElementById("fire").play();
     score = score - 1;
@@ -94,7 +96,7 @@ document.onkeydown = (e) => {
 
 const drawBojo = () => {
   document.getElementById("bojo").style.left = bojo.left + "px";
-  document.getElementById("bojo").style.top = bojo.top + "px";
+  document.getElementById("bojo").style.bottom = bojo.bottom + "px";
 };
 
 const drawLooRolls = () => {
@@ -102,13 +104,13 @@ const drawLooRolls = () => {
   for (let i = 0; i < looRolls.length; i++) {
     document.getElementById(
       "looRolls"
-    ).innerHTML += `<div class='looRoll' style='left:${looRolls[i].left}px; top:${looRolls[i].top}px'></div>`;
+    ).innerHTML += `<div class='looRoll' style='left:${looRolls[i].left}px; bottom:${looRolls[i].bottom}px'></div>`;
   }
 };
 
 const moveLooRolls = () => {
   for (let i = 0; i < looRolls.length; i++) {
-    looRolls[i].top = looRolls[i].top - 12;
+    looRolls[i].bottom = looRolls[i].bottom + 12;
   }
 };
 
@@ -117,7 +119,7 @@ const drawNHS = () => {
   for (let i = 0; i < heroes.length; i++) {
     document.getElementById(
       "heroes"
-    ).innerHTML += `<div class='nhs' style='left:${heroes[i].left}px; top:${heroes[i].top}px'></div>`;
+    ).innerHTML += `<div class='nhs' style='left:${heroes[i].left}px; bottom:${heroes[i].bottom}px'></div>`;
   }
 };
 
@@ -126,7 +128,7 @@ const drawEnemies = () => {
   for (let i = 0; i < enemies.length; i++) {
     document.getElementById(
       "enemies"
-    ).innerHTML += `<div class='covid' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+    ).innerHTML += `<div class='covid' style='left:${enemies[i].left}px; bottom:${enemies[i].bottom}px'></div>`;
   }
 };
 
@@ -144,7 +146,7 @@ const moveEnemies = () => {
       break;
     default:
       enemies.forEach((enemy) => {
-        enemy.top = enemy.top + 1;
+        enemy.bottom = enemy.bottom - 1;
       });
   }
 };
@@ -153,10 +155,9 @@ const enemyCollisionDetection = () => {
   for (let looRoll = 0; looRoll < looRolls.length; looRoll++) {
     for (let covid = 0; covid < enemies.length; covid++) {
       if (
-        looRolls[looRoll].left >= enemies[covid].left - 10 &&
-        looRolls[looRoll].left <= enemies[covid].left + 30 &&
-        looRolls[looRoll].top <= enemies[covid].top + 30 &&
-        looRolls[looRoll].top >= enemies[covid].top
+        looRolls[looRoll].left + 30 >= enemies[covid].left &&
+        looRolls[looRoll].left <= enemies[covid].left + 50 &&
+        looRolls[looRoll].bottom + 50 >= enemies[covid].bottom
       ) {
         score = score + 4;
         enemies.splice(covid, 1);
@@ -171,10 +172,10 @@ const heroesCollisionDetection = () => {
   for (covid = 0; covid < enemies.length; covid++) {
     for (let nhs = 0; nhs < heroes.length; nhs++) {
       if (
-        heroes[nhs].left >= enemies[covid].left - 15 &&
-        heroes[nhs].left <= enemies[covid].left + 40 &&
-        heroes[nhs].top <= enemies[covid].top + 40 &&
-        heroes[nhs].top >= enemies[covid].top
+        (heroes[nhs].left <= enemies[covid].left + 50 &&
+          heroes[nhs].bottom + 33 >= enemies[covid].bottom) ||
+        (heroes[nhs].bottom + 33 >= enemies[covid].bottom &&
+          heroes[nhs].left + 80 <= enemies[covid].left)
       ) {
         enemies.splice(covid, 1);
         heroes.splice(nhs, 1);
@@ -190,8 +191,7 @@ const friendlyFire = () => {
       if (
         looRolls[looRoll].left >= heroes[nhs].left - 20 &&
         looRolls[looRoll].left <= heroes[nhs].left + 70 &&
-        looRolls[looRoll].top <= heroes[nhs].top + 30 &&
-        looRolls[looRoll].top >= heroes[nhs].top
+        looRolls[looRoll].bottom + 50 >= heroes[nhs].bottom
       ) {
         heroes.splice(nhs, 1);
         looRolls.splice(looRoll, 1);
@@ -237,9 +237,9 @@ const loseGame = () => {
     if (
       (bojo.left >= enemies[covid].left - 40 &&
         bojo.left <= enemies[covid].left + 40 &&
-        bojo.top <= enemies[covid].top + 40 &&
-        bojo.top >= enemies[covid].top) ||
-      enemies[covid].top >= sectionHeight
+        bojo.bottom + 80 >= enemies[covid].bottom &&
+        bojo.bottom <= enemies[covid].bottom) ||
+      enemies[covid].bottom <= 0
     ) {
       covid = 0;
       removeAllFromPage();
@@ -281,7 +281,6 @@ startGame = () => {
   score = 0;
   document.getElementById("streetsSafer").play();
   heroes = [...h];
-  // enemies = JSON.parse(JSON.stringify(en));
   enemies = en.map((obj) => ({ ...obj }));
   setInterval(changeDirection, 4000);
   direction = 4;
